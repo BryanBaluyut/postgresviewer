@@ -4,15 +4,14 @@ import cors from 'cors';
 import { Client } from 'pg';
 
 const app = express();
-const port = 3000;
+const port = 3002;
 
 app.use(cors());
 app.use(express.json());
 
 app.post('/api/connect', async (req, res) => {
   console.log('Received connection request:', { ...req.body, password: '***' });
-  
-  const { host, port, user, password, database } = req.body;
+    const { host, port, user, password, database, connectionTimeoutMillis } = req.body;
   
   if (!host || !port || !user || !password) {
     return res.status(400).json({
@@ -26,7 +25,8 @@ app.post('/api/connect', async (req, res) => {
     port,
     user,
     password,
-    database: database || 'postgres'
+    database: database || 'postgres',
+    connectionTimeoutMillis: connectionTimeoutMillis || 10000, // Default 10 second timeout
   });
 
   try {
@@ -46,10 +46,11 @@ app.post('/api/connect', async (req, res) => {
   } catch (error) {
     console.error('Database error:', error);
     let errorMessage = 'An unexpected error occurred';
-    
-    if (error instanceof Error) {
+      if (error instanceof Error) {
       if (error.message.includes('ECONNREFUSED')) {
         errorMessage = 'Could not connect to PostgreSQL server. Please check if it is running and the connection details are correct.';
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'Connection timed out. The server took too long to respond.';
       } else {
         errorMessage = error.message;
       }

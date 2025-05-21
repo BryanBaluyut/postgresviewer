@@ -1,35 +1,48 @@
-# React + TypeScript + Vite
+# PostgreSQL Database Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application that allows you to connect to PostgreSQL servers and view their databases. Built with React, TypeScript, and Express.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔐 Secure PostgreSQL server connection management
+- 💾 Save and manage multiple database connections
+- 🌙 Dark mode interface
+- 📋 List all databases on the connected server
+- 🔒 Secure password handling (never stored locally)
 
-## Expanding the ESLint configuration
+## Usage
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Connect to a Database Server:**
+   - Enter your PostgreSQL server details (host, port, username, password)
+   - Optionally save the connection for future use
+   - Click "Connect" to establish the connection
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2. **View Databases:**
+   - Once connected, you'll see a list of all available databases
+   - The list excludes template databases
+
+3. **Managing Saved Connections:**
+   - Save frequently used connections with a custom name
+   - Select saved connections from the dropdown
+   - Delete saved connections when no longer needed
+   - Passwords are never stored for security
+
+## Development
+
+- `npm run dev` - Start both frontend and backend in development mode
+- `npm run dev:client` - Start only the frontend
+- `npm run dev:server` - Start only the backend
+- `npm run build` - Build for production
+
+## Security
+
+- Passwords are never stored locally
+- All connection details are secured and only stored in memory during the session
+- Backend uses environment variables for sensitive data
+
+## License
+
+This project is licensed under the MIT License.
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 

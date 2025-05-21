@@ -13,6 +13,10 @@ function App() {
   const [isConnecting, setIsConnecting] = useState(false);
   const [databases, setDatabases] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: 'success' | 'error';
+  } | null>(null);
 
   const handleConnect = async (config: PostgresConnection) => {
     setIsConnecting(true);
@@ -48,9 +52,23 @@ function App() {
             {error}
           </Notification>
         )}
+        
+        {notification && (
+          <Notification 
+            color={notification.type === 'success' ? 'green' : 'red'}
+            mb="md"
+            onClose={() => setNotification(null)}
+            title={notification.type === 'success' ? 'Success' : 'Error'}
+          >
+            {notification.message}
+          </Notification>
+        )}
 
         {databases.length === 0 ? (
-          <ConnectionForm onConnect={handleConnect} isConnecting={isConnecting} />
+          <ConnectionForm 
+            onConnect={handleConnect} 
+            isConnecting={isConnecting}
+          />
         ) : (
           <DatabaseList databases={databases} />
         )}

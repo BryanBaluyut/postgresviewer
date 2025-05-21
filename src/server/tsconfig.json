@@ -7,7 +7,11 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "../../dist/server",
-    "types": ["node"]
+    "types": ["node"],
+    "allowJs": true
   },
-  "include": ["./**/*"]
+  "include": ["./**/*"],
+  "ts-node": {
+    "esm": false
+  }
 }

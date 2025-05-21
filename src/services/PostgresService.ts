@@ -1,14 +1,14 @@
 type PostgresConnection = {
-  name?: string;
   host: string;
   port: number;
   user: string;
   password: string;
   database?: string;
+  connectionTimeoutMillis?: number;
 };
 
 class PostgresService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = '/api';
   private databases: string[] = [];
 
   async connect(config: PostgresConnection): Promise<boolean> {

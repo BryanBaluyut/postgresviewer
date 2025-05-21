@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "dev:client": "vite",
+    "dev:client": "vite --port 3000 --host",
     "dev:server": "ts-node-dev --project src/server/tsconfig.json --transpile-only src/server/server.ts",
     "build": "tsc -b && vite build",
     "lint": "eslint .",

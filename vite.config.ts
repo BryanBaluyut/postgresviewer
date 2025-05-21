@@ -9,4 +9,16 @@ export default defineConfig({
       plugins: ['@emotion/babel-plugin'],
     },
   })],
+  server: {
+    port: 3000,
+    strictPort: true,
+    host: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3002',
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  }
 })

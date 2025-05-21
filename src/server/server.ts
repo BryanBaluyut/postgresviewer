@@ -9,7 +9,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-app.post('/api/connect', async (req: Request, res: Response) => {
+app.post('/api/connect', async (req, res) => {
   console.log('Received connection request:', { ...req.body, password: '***' });
   
   const { host, port, user, password, database } = req.body;
